@@ -4,5 +4,5 @@
 *.swp
 *.tmp
 *.lock
-/.deps
+.deps
 .~lock*

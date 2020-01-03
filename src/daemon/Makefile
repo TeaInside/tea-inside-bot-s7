@@ -8,7 +8,7 @@ SOURCE_DIR = src/
 ROOT_DEPDIR = .deps
 STD_FLAG =
 CONSTANTS = 
-INCLUDE = -Iinclude/
+INCLUDE = -Iinclude/ -Isrc/third_party
 
 ifeq (${RELEASE_MODE},1)
 	LINKER_FLAGS  = ${STD_FLAG} ${INCLUDE} -Wall -fno-stack-protector -Ofast ${CONSTANTS} -o

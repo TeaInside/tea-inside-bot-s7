@@ -11,18 +11,12 @@
 extern "C" {
 #endif
 
-#include <stdio.h>
-
 #include <icetea/server/server.h>
 
 
-int main(int argc, char *argv[])
+uint8_t run_server()
 {
-    
-    run_server();
-
-
-    return 0;
+	
 }
 
 
