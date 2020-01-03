@@ -13,30 +13,38 @@ extern "C" {
 
 #include <stdio.h>
 #include <string.h>
+
+#include <inih/ini.h>
+
+#include <icetea/icetea.h>
 #include <icetea/server/server.h>
 
-static inline int load_config();
+icetea_config cfg;
+
+static inline bool load_config();
 
 /**
  * Run the TeaBot server.
  */
 uint8_t run_server()
 {
-    load_config();
+    if (!load_config()) {
+        return 1;
+    }
 
     return 0;
 }
 
-static int load_config_handler(
-    void* user, const char* section,
-    const char* name, const char* value)
+static int config_handler(void* user, const char* section,
+                            const char* name, const char* value)
 {
     #define config (())
 
 
     if (!strcmp(section, "bot")) {
         if (!strcmp(name, "token")) {
-
+            cfg.token = strdup(value);
+            tea_log(3, "Loaded bot token");
         }
     }
 
@@ -46,16 +54,16 @@ static int load_config_handler(
 /**
  * Load TeaBot config.
  */
-int load_config()
+static inline bool load_config()
 {
-    configuration config;
+    memset(&cfg, 0, sizeof(cfg));
+    cfg.log_level = 3;
 
-    if (ini_parse("test.ini", load_config_handler, &config) < 0) {
-        printf("Can't load 'test.ini'\n");
+    if (ini_parse("config.ini", config_handler, NULL) < 0) {
+        printf("Can't load \"config.ini\"\n");
         return 1;
     }
-    printf("Config loaded from 'test.ini': version=%d, name=%s, email=%s\n",
-        config.version, config.name, config.email);
+
     return 0;
 }
 

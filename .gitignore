@@ -6,3 +6,4 @@
 *.lock
 .deps
 .~lock*
+config.ini
