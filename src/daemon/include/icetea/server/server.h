@@ -4,4 +4,6 @@
 
 #include <stdint.h>
 
+uint8_t run_server();
+
 #endif
