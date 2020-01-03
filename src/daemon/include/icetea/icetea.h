@@ -27,6 +27,12 @@ typedef struct {
 uint8_t __internal_debug_log(const char *msg, ...);
 
 #define tea_log(log_lvl, ...) \
-    (log_lvl <= cfg.log_level) && (__internal_debug_log(#__VA_ARGS__))
+    if (log_lvl <= cfg.log_level) (__internal_debug_log(__VA_ARGS__))
+
+#ifdef ICETEA_DEBUG
+    #define debug_log(...) (__internal_debug_log(__VA_ARGS__))
+#else
+    #define debug_log(...)
+#endif
 
 #endif

@@ -13,6 +13,7 @@ extern "C" {
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 #include <inih/ini.h>
 
@@ -21,6 +22,7 @@ extern "C" {
 
 icetea_config cfg;
 
+static bool config_err = false;
 static inline bool load_config();
 
 /**
@@ -38,14 +40,41 @@ uint8_t run_server()
 static int config_handler(void* user, const char* section,
                             const char* name, const char* value)
 {
-    #define config (())
-
+    if (config_err) {
+        return 1;
+    }
 
     if (!strcmp(section, "bot")) {
         if (!strcmp(name, "token")) {
             cfg.token = strdup(value);
-            tea_log(3, "Loaded bot token");
+            tea_log(5, "Loaded bot token");
+            debug_log("Bot token \"%s\"", cfg.token);
         }
+    } else if (!strcmp(section, "database")) {
+
+        #define DBMC(A) \
+            if (!strcmp(name, #A)) { \
+                cfg.db.A = strdup(value); \
+                tea_log(5, "Loaded database "#A); \
+                debug_log("Database "#A " \"%s\"", cfg.db.A); \
+            }
+
+        DBMC(host) else
+        DBMC(user) else
+        DBMC(pass) else
+        DBMC(dbname) else
+        if (!strcmp(name, "port")) {
+            cfg.db.port = atoi(value);
+            tea_log(5, "Loaded database port");
+            debug_log("Database port %d", cfg.db.port);
+        } else {
+            tea_log(0,
+                "Parse error: invalid key \"%s\" on section \"%s\"",
+                name, section);
+            config_err = true;
+        }
+
+        #undef DBMC
     }
 
     return 1;
@@ -57,14 +86,20 @@ static int config_handler(void* user, const char* section,
 static inline bool load_config()
 {
     memset(&cfg, 0, sizeof(cfg));
-    cfg.log_level = 3;
+    cfg.log_level = 4;
+
+    tea_log(0, "Loading config...");
 
     if (ini_parse("config.ini", config_handler, NULL) < 0) {
         printf("Can't load \"config.ini\"\n");
-        return 1;
+        return false;
     }
 
-    return 0;
+    if (config_err) {
+        return false;
+    }
+
+    return true;
 }
 
 
