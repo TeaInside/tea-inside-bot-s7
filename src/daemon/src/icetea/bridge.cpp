@@ -15,9 +15,14 @@ extern "C" {
 
 #include <icetea/server/server.h>
 
-int main(int argc, char *argv[])
+int icetea_bot_daemon_init()
 {
-    return init_daemon();
+    init_daemon();
+}
+
+void icetea_bot_update_handler(char *json)
+{
+
 }
 
 #ifdef __cplusplus

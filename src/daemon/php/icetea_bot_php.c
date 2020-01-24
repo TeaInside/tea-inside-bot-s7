@@ -1,11 +1,10 @@
 
-#include "lang.h"
 #include "icetea_bot_php.h"
 
 /**
  * @author Ammar Faizi <ammarfaizi2@gmail.com> https://www.facebook.com/ammarfaizi2
  * @license MIT
- * @version 6.2.0
+ * @version 7.0
  */
 #ifdef COMPILE_DL_TEABOT
     #ifdef ZTS
@@ -17,73 +16,30 @@
 
 ZEND_DECLARE_MODULE_GLOBALS(icetea_bot);
 
-zend_class_entry
-    *icetea_bot_lang_ce,
-    *icetea_bot_captchathread_ce;
-
-const char langlist[][2] = {"en", "id", "jp"};
+zend_class_entry *icetea_bot_daemon_ce;
 
 /**
- * TeaBot\Lang
+ * TeaBot\Daemon
  */
-const zend_function_entry icetea_bot_lang_class_methods[] = {
-    PHP_ME(TeaBot_Lang, __construct, NULL, ZEND_ACC_PRIVATE | ZEND_ACC_CTOR)
-    PHP_ME(TeaBot_Lang, init, NULL, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC)
-    PHP_ME(TeaBot_Lang, setFallbackLang, NULL, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC)
-    PHP_ME(TeaBot_Lang, get, NULL, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC)
-    PHP_ME(TeaBot_Lang, getLang, NULL, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC)
-    PHP_ME(TeaBot_Lang, getFallbackLang, NULL, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC)
+const zend_function_entry icetea_bot_daemon_class_methods[] = {
+    PHP_ME(TeaBot_Daemon, __construct, NULL, ZEND_ACC_PUBLIC | ZEND_ACC_CTOR)
+    PHP_ME(TeaBot_Daemon, run, NULL, ZEND_ACC_PUBLIC)
     PHP_FE_END
 };
 
-/**
- * TeaBot\CaptchaThread
- */
-const zend_function_entry icetea_bot_captchathread_class_methods[] = {
-    PHP_ME(TeaBot_CaptchaThread, __construct, NULL, ZEND_ACC_PUBLIC | ZEND_ACC_CTOR)
-    PHP_ME(TeaBot_CaptchaThread, run, NULL, ZEND_ACC_PUBLIC)
-    PHP_ME(TeaBot_CaptchaThread, dispatch, NULL, ZEND_ACC_PUBLIC)
-    PHP_ME(TeaBot_CaptchaThread, cancel, NULL, ZEND_ACC_PUBLIC)
-    PHP_FE_END
-};
 
 /**
  * Init.
  */
 static PHP_MINIT_FUNCTION(icetea_bot)
 {
-    zend_class_entry ce1, ce2;
+    zend_class_entry ce1;
 
-    INIT_NS_CLASS_ENTRY(ce1, "TeaBot", "Lang",
-        icetea_bot_lang_class_methods);
-    icetea_bot_lang_ce = zend_register_internal_class(&ce1 TSRMLS_CC);
-
-    INIT_NS_CLASS_ENTRY(ce2, "TeaBot", "CaptchaThread",
-        icetea_bot_captchathread_class_methods);
-    icetea_bot_captchathread_ce = zend_register_internal_class(&ce2 TSRMLS_CC);
+    INIT_NS_CLASS_ENTRY(ce1, "TeaBot", "Daemon",
+        icetea_bot_daemon_class_methods);
+    icetea_bot_daemon_ce = zend_register_internal_class(&ce1 TSRMLS_CC);
 
     REGISTER_INI_ENTRIES();
-
-    /**
-     * TeaBot\Lang
-     */
-    zend_declare_property_stringl(icetea_bot_lang_ce, ZEND_STRL("lang"),
-        "en", 2, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC TSRMLS_CC);
-
-    zend_declare_property_stringl(icetea_bot_lang_ce, ZEND_STRL("fallbackLang"),
-        "en", 2, ZEND_ACC_PUBLIC | ZEND_ACC_STATIC TSRMLS_CC);
-
-    /**
-     * TeaBot\CaptchaThread
-     */
-    zend_declare_property_long(icetea_bot_captchathread_ce, ZEND_STRL("tid"),
-        0, ZEND_ACC_PUBLIC TSRMLS_CC);
-
-    zend_declare_property_stringl(icetea_bot_captchathread_ce, ZEND_STRL("token"),
-        NULL, 0, ZEND_ACC_PUBLIC TSRMLS_CC);
-
-    zend_declare_property_stringl(icetea_bot_captchathread_ce, ZEND_STRL("captcha_dir"),
-        NULL, 0, ZEND_ACC_PUBLIC TSRMLS_CC);
 
     return SUCCESS;
 }
@@ -116,10 +72,12 @@ zend_module_entry icetea_bot_module_entry = {
     NULL, /* RINIT */
     NULL, /* RSHUTDOWN */
     NULL, /* MINFO */
-    TEABOT_VERSION,
+    ICETEA_BOT_VERSION,
     PHP_MODULE_GLOBALS(icetea_bot),
     PHP_GINIT(icetea_bot),
     NULL, /* GSHUTDOWN */
     NULL, /* RPOSTSHUTDOWN */
     STANDARD_MODULE_PROPERTIES_EX
 };
+
+ZEND_GET_MODULE(icetea_bot)

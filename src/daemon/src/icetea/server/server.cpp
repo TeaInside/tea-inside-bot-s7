@@ -30,7 +30,7 @@ static inline bool load_config();
 /**
  * Run the TeaBot server.
  */
-uint8_t run_server()
+uint8_t init_daemon()
 {
     if (!load_config()) {
         return 1;

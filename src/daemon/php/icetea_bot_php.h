@@ -1,9 +1,9 @@
 
 
-#ifndef icetea_bot_H
-#define icetea_bot_H
+#ifndef ICETEA_BOT_H
+#define ICETEA_BOT_H
 
-    #define icetea_bot_VERSION "7.0"
+    #define ICETEA_BOT_VERSION "7.0"
 
     #include "php.h"
 
@@ -20,7 +20,8 @@
 
     extern zend_module_entry icetea_bot_module_entry;
 
-    PHP_METHOD(icetea_bot_Daemon, __construct);
+    PHP_METHOD(TeaBot_Daemon, __construct);
+    PHP_METHOD(TeaBot_Daemon, run);
 
     ZEND_BEGIN_MODULE_GLOBALS(icetea_bot)
     ZEND_END_MODULE_GLOBALS(icetea_bot)

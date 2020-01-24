@@ -4,6 +4,6 @@
 
 #include <stdint.h>
 
-uint8_t run_server();
+uint8_t init_daemon();
 
 #endif
