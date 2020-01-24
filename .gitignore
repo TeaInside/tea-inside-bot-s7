@@ -7,3 +7,4 @@
 .deps
 .~lock*
 config.ini
+src/daemon/icetea

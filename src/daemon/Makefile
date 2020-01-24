@@ -1,5 +1,5 @@
 
-BASEDIR = ~$$BASEDIR$$~
+BASEDIR = /home/ammarfaizi2/project/now/bot-s7/src/daemon
 MAIN_BIN = ${BASEDIR}/icetea
 LIB_SHARED_BIN = ${BASEDIR}/libicetea-s7.so
 COMPILER = g++

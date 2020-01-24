@@ -3,6 +3,16 @@
 $shWorkingDirectory = null;
 
 /**
+ * @param string $dir
+ * @return void
+ */
+function shchdir(string $dir): void
+{
+    global $shWorkingDirectory;
+    $shWorkingDirectory = $dir;
+}
+
+/**
  * @param string $cmd
  * @return void
  */

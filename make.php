@@ -2,18 +2,24 @@
 
 require __DIR__."/src/build_utils/helpers.php";
 
-$daemonDir = __DIR__."/src/daemon";
+$makeDir = __DIR__;
 
-/**
- * Build daemon section.
- */
-
-// Build Makefile from Makefile.frag
-
-$fragFile = $daemonDir."/Makefile.frag";
-if (file_exists($fragFile)) {
-	mmlog("Frag file does not exist: %s", $fragFile);
-	exit(1);
+if (isset($argv[1])) {
+    $buildType = $argv[1];
+    if (!in_array($buildType, ["normal", "release", "clean"])) {
+        mmlog("Invalid build type \"%s\"", $buildType);
+        exit(1);
+    }
+} else {
+    $buildType = "normal";
 }
 
-$frag = file_get_contents($fragFile);
+$buildQueues = [
+    "daemon.php"
+];
+
+foreach ($buildQueues as $k => $v) {
+    if (file_exists($f = __DIR__."/src/build_utils/".$buildType."/".$v)) {
+        require $f;
+    }
+}
