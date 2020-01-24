@@ -9,3 +9,5 @@
 .~lock*
 config.ini
 src/daemon/icetea
+src/daemon/Makefile
+src/daemon/phplink.sh
