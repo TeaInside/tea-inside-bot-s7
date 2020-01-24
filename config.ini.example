@@ -1,0 +1,15 @@
+
+[misc]
+log_level=10
+
+[bot]
+token=...
+
+[database]
+host=127.0.0.1
+user=root
+pass=123
+port=3306
+dbname=esteh
+
+[sudoers]
