@@ -6,7 +6,7 @@ $makeDir = __DIR__;
 
 if (isset($argv[1])) {
     $buildType = $argv[1];
-    if (!in_array($buildType, ["normal", "release", "clean"])) {
+    if (!in_array($buildType, ["normal", "release", "clean", "clean-all"])) {
         mmlog("Invalid build type \"%s\"", $buildType);
         exit(1);
     }
@@ -15,6 +15,7 @@ if (isset($argv[1])) {
 }
 
 $buildQueues = [
+    "phpext.php",
     "daemon.php"
 ];
 
