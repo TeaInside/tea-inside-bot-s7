@@ -31,3 +31,6 @@ $frag = str_replace("~\$\$BASEDIR\$\$~", $daemonDir, $frag);
 file_put_contents($daemonDir."/phplink.sh", $frag);
 shchdir($daemonDir);
 sh("bash phplink.sh");
+
+shchdir($makeDir);
+sh("ln -svf src/daemon/php/modules/icetea_bot.so .");
