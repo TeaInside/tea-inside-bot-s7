@@ -1,7 +1,7 @@
 
 BASEDIR = /home/ammarfaizi2/project/now/bot-s7/src/daemon
-MAIN_BIN = ${BASEDIR}/icetea
-LIB_SHARED_BIN = ${BASEDIR}/libicetea-s7.so
+MAIN_BIN = icetea
+LIB_SHARED_BIN = libicetea-s7.so
 COMPILER = g++
 LINKER = g++
 LIBS = -lpthread
@@ -46,7 +46,9 @@ ${LIB_SHARED_BIN}: ${OBJECTS}
 	${LINKER} -shared ${LINKER_FLAGS} -o ${LIB_SHARED_BIN} ${OBJECTS}
 
 ${MAIN_BIN}: ${LIB_SHARED_BIN}
-	${LINKER} ${LINKER_FLAGS} -o ${MAIN_BIN} ${BASEDIR}/main.cpp -licetea-s7 -L${BASEDIR}
+	${LINKER} ${LINKER_FLAGS} -o ${MAIN_BIN} main.cpp -licetea-s7 -L${BASEDIR}
+
+-include ${DEPFILES}
 
 clean:
 	rm -rfv ${DEPFILES} ${OBJECTS} ${MAIN_BIN} ${LIB_SHARED_BIN}

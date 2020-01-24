@@ -23,7 +23,7 @@ function sh(string $cmd): void
     $fd = [
         STDIN,
         ["pipe", "w"],
-        ["pipe", "w"]
+        ["file", "php://stderr", "w"]
     ];
     $internalCmd = "sh -c ".escapeshellarg($cmd)."; echo exit_code__:$?;";
     $proc = proc_open($internalCmd, $fd, $pipes, $shWorkingDirectory);

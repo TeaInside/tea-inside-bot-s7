@@ -7,16 +7,18 @@
  * @version 7.0.0
  */
 
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 
-#include <inih/ini.h>
+#include <icetea/teabot/Exe.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include <inih/ini.h>
 #include <icetea/icetea.h>
 #include <icetea/server/server.h>
 
@@ -34,11 +36,13 @@ uint8_t run_server()
         return 1;
     }
 
+    // Initialize baseurl to telegram API.
+    Exe::initUrl();
+
     return 0;
 }
 
-static int config_handler(void* user, const char* section,
-                            const char* name, const char* value)
+static int config_handler(void* user, const char* section, const char* name, const char* value)
 {
     if (config_err) {
         return 1;
