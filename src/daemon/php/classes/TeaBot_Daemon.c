@@ -23,7 +23,7 @@ PHP_METHOD(TeaBot_Daemon, run)
     char *json;
     size_t length;
 
-    ZEND_PARSE_PARAMETERS_START(2, 2)
+    ZEND_PARSE_PARAMETERS_START(1, 1)
         Z_PARAM_STRING(json, length)
     ZEND_PARSE_PARAMETERS_END();
 

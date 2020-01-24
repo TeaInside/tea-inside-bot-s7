@@ -37,7 +37,7 @@ uint8_t init_daemon()
     }
 
     // Initialize baseurl to telegram API.
-    Exe::initUrl();
+    TeaBot::Exe::initUrl();
 
     return 0;
 }

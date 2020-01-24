@@ -18,11 +18,12 @@ extern "C" {
 int icetea_bot_daemon_init()
 {
     init_daemon();
+    return 0;
 }
 
 void icetea_bot_update_handler(char *json)
 {
-
+    printf("Data: %s\n", json);
 }
 
 #ifdef __cplusplus
