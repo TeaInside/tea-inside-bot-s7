@@ -17,7 +17,7 @@ tg_icetea_obj *tg_icetea_init(tg_icetea_opt *opt)
     return tgic;
 }
 
-void tg_process_update(tg_icetea_obj *tgic, char *json)
+void tg_icetea_process_update(tg_icetea_obj *tgic, char *json)
 {
     STH(tgic)->processUpdate(json);
 }

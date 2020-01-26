@@ -23,4 +23,40 @@ __halt_compiler();
 require __DIR__."/../config.php";
 
 $st = new TgIceTea\TgIceTea(BOT_TOKEN, BOT_USERNAME);
-$st->process_update("test");
+
+$lastUpdateId = 0;
+
+while (true) {
+    $ch = curl_init("https://api.telegram.org/bot".BOT_TOKEN."/getUpdates?offset=".($lastUpdateId + 1));
+    curl_setopt_array($ch,
+        [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_SSL_VERIFYPEER => false,
+            CURLOPT_SSL_VERIFYHOST => false
+        ]
+    );
+    $o = json_decode(curl_exec($ch), true);
+    curl_close($ch);
+    
+    if (!$o["ok"]) {
+        echo json_encode($o, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+        exit(1);
+    }
+
+    $hasUpdate = false;
+
+    foreach ($o["result"] as $k => $v) {
+        if ($v["update_id"] > $lastUpdateId) {
+            $hasUpdate = true;
+            $lastUpdateId = $v["update_id"];
+            echo "Processing ".$v["update_id"]."\n";
+            $st->process_update(json_encode($v, JSON_UNESCAPED_SLASHES));
+        }
+    }
+
+    if (!$hasUpdate) {
+        echo "No update\n";
+    }
+
+    sleep(1);
+}

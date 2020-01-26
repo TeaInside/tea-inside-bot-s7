@@ -92,7 +92,13 @@ PHP_METHOD(TgIceTea_TgIceTea, __destruct)
  */
 PHP_METHOD(TgIceTea_TgIceTea, process_update)
 {
+    char *json;
+    size_t json_len;
     zval rv, *tgic_zval;
+
+    ZEND_PARSE_PARAMETERS_START(1, 1)
+        Z_PARAM_STRING(json, json_len)
+    ZEND_PARSE_PARAMETERS_END();
 
     tgic_zval = zend_read_property(
         tg_icetea_ce,
@@ -104,7 +110,7 @@ PHP_METHOD(TgIceTea_TgIceTea, process_update)
 
     #define tgic (*((tg_icetea_obj **)(tgic_zval->value.str->val)))
 
-    
+    tg_icetea_process_update(tgic, json);
 
     #undef tgic
 }

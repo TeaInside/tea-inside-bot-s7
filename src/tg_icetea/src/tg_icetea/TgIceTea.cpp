@@ -29,7 +29,7 @@ TgIceTea::TgIceTea(char *token, char *username)
  */
 void TgIceTea::processUpdate(char *json)
 {
-    
+    printf("test processUpdate: %s\n", json);
 }
 
 } // namespace tg_icetea
