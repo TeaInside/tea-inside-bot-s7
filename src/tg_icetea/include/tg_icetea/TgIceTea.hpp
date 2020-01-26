@@ -5,19 +5,22 @@
 #define DEBUG_LEVEL 10
 
 #include <cstdint>
+#include <nlohmann/json.hpp>
 
 namespace tg_icetea {
+
+using json = nlohmann::json;
 
 class TgIceTea
 {
 public:
     TgIceTea(char *token, char *bot_username);
-    void processUpdate(char *json);
+    void processUpdate(char *json_string);
 
 private:
+    json in;
     char token[64];
     char username[64];
-
     uint8_t log_level = 0;
 };
 

@@ -5,6 +5,8 @@
 
 namespace tg_icetea {
 
+using json = nlohmann::json;
+
 /**
  * Constructor.
  *
@@ -25,11 +27,12 @@ TgIceTea::TgIceTea(char *token, char *username)
 /**
  * Process update from Telegram server.
  *
- * @param char *json
+ * @param char *json_string
  */
-void TgIceTea::processUpdate(char *json)
+void TgIceTea::processUpdate(char *json_string)
 {
-    printf("test processUpdate: %s\n", json);
+    this->in = json::parse(json_string);
+    printf("json: %s\n", this->in.dump().c_str());
 }
 
 } // namespace tg_icetea
