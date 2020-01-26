@@ -19,5 +19,14 @@ TgIceTea::TgIceTea(char *token, char *bot_username)
     strcpy(this->bot_username, bot_username);
 }
 
+/**
+ * Process update from Telegram server.
+ *
+ * @param char *json
+ */
+TgIceTea::processUpdate(char *json)
+{
+    
+}
 
 } // namespace tg_icetea
