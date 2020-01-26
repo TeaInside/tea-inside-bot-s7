@@ -9,14 +9,17 @@ namespace tg_icetea {
  * Constructor.
  *
  * @param char *token (Bot token)
- * @param char *bot_username (Bot username which belongs to bot token)
+ * @param char *username (Bot username which belongs to bot token)
  */
-TgIceTea::TgIceTea(char *token, char *bot_username)
+TgIceTea::TgIceTea(char *token, char *username)
 {
-    tea_log(4, "Initializing TgIceTea...");
+    tea_log(3, "Initializing TgIceTea...");
 
-    strcpy(this->token, token);
-    strcpy(this->bot_username, bot_username);
+    strncpy(this->token, token, 64);
+    strncpy(this->username, username, 64);
+
+    tea_log(5, "Bot token: %s", this->token);
+    tea_log(5, "Bot username: %s", this->username);
 }
 
 /**

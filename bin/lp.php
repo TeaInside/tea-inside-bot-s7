@@ -9,7 +9,8 @@ $proc = proc_open(
         ["file", "/dev/tty", "w"],
         ["file", "/dev/tty", "w"]
     ],
-    $pipes
+    $pipes,
+    __DIR__
 );
 
 
@@ -19,7 +20,7 @@ proc_close($proc);
 
 __halt_compiler();
 
-$st = new TgIceTea\TgIceTea("test", "abc");
-$st->process_update("test");
+require __DIR__."/../config.php";
 
-var_dump($st);
+$st = new TgIceTea\TgIceTea(BOT_TOKEN, BOT_USERNAME);
+$st->process_update("test");

@@ -13,7 +13,7 @@ extern "C" {
 tg_icetea_obj *tg_icetea_init(tg_icetea_opt *opt)
 {
     tg_icetea_obj *tgic = (tg_icetea_obj *)malloc(sizeof(tg_icetea_obj));
-    STH(tgic) = new TgIceTea(opt->token, opt->bot_username);
+    STH(tgic) = new TgIceTea(opt->token, opt->username);
     return tgic;
 }
 

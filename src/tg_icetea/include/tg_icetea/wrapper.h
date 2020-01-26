@@ -18,7 +18,7 @@ typedef struct {
 
 typedef struct {
     char *token;
-    char *bot_username;
+    char *username;
 } tg_icetea_opt;
 
 tg_icetea_obj *tg_icetea_init(tg_icetea_opt *opt);

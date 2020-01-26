@@ -49,8 +49,8 @@ PHP_METHOD(TgIceTea_TgIceTea, __construct)
         Z_PARAM_STRING(bot_username, bot_username_len)
     ZEND_PARSE_PARAMETERS_END();
 
-    opt.token = bot_username;
-    opt.bot_username = bot_username;
+    opt.token = bot_token;
+    opt.username = bot_username;
 
     tgic = tg_icetea_init(&opt);
     zend_update_property_stringl(
