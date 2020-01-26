@@ -26,7 +26,10 @@ void tg_icetea_destroy(tg_icetea_obj *tgic)
 {
     delete STH(tgic);
     free(tgic);
-    printf("Destroyed!\n");
+
+    #ifdef ICETEA_DEBUG
+    printf("TgIceTea object has been destroyed!\n");
+    #endif
 }
 
 } // extern "C"
