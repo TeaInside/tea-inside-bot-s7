@@ -3,7 +3,7 @@
 $php = "<?php ".trim(substr(file_get_contents(__FILE__), __COMPILER_HALT_OFFSET__));
 
 $proc = proc_open(
-    "php -d extension=".escapeshellarg(__DIR__."/../icetea_bot.so"),
+    "php -d extension=".escapeshellarg(__DIR__."/../tg_icetea.so"),
     [
         ["pipe", "r"],
         ["file", "/dev/tty", "w"],
@@ -20,4 +20,4 @@ proc_close($proc);
 __halt_compiler();
 
 $st = new TgIceTea\TgIceTea("test", "abc");
-$st->run("test");
+$st->process_update("test");

@@ -20,6 +20,7 @@
     extern zend_module_entry tg_icetea_module_entry;
 
     PHP_METHOD(TgIceTea_TgIceTea, __construct);
+    PHP_METHOD(TgIceTea_TgIceTea, __destruct);
     PHP_METHOD(TgIceTea_TgIceTea, process_update);
 
     ZEND_BEGIN_MODULE_GLOBALS(tg_icetea)

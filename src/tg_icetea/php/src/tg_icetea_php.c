@@ -1,5 +1,7 @@
 
+#include <stdlib.h>
 #include "tg_icetea_php.h"
+#include "../../include/tg_icetea/wrapper.h"
 
 /**
  * @author Ammar Faizi <ammarfaizi2@gmail.com> https://www.facebook.com/ammarfaizi2
@@ -22,9 +24,62 @@ zend_class_entry *tg_icetea_ce;
  */
 const zend_function_entry tg_icetea_methods[] = {
     PHP_ME(TgIceTea_TgIceTea, __construct, NULL, ZEND_ACC_PUBLIC | ZEND_ACC_CTOR)
+    PHP_ME(TgIceTea_TgIceTea, __destruct, NULL, ZEND_ACC_PUBLIC | ZEND_ACC_DTOR)
     PHP_ME(TgIceTea_TgIceTea, process_update, NULL, ZEND_ACC_PUBLIC)
     PHP_FE_END
 };
+
+
+/**
+ * TgIceTea::__construct
+ *
+ * @param string $botToken
+ * @Param string $botUsername
+ */
+PHP_METHOD(TgIceTea_TgIceTea, __construct)
+{
+    tg_icetea_opt opt;
+    tg_icetea_obj *tgic;
+    char *bot_token, *bot_username;
+    size_t bot_token_len, bot_username_len;
+
+    ZEND_PARSE_PARAMETERS_START(2, 2)
+        Z_PARAM_STRING(bot_token, bot_token_len)
+        Z_PARAM_STRING(bot_username, bot_username_len)
+    ZEND_PARSE_PARAMETERS_END();
+
+    opt.token = bot_username;
+    opt.bot_username = bot_username;
+
+    tgic = tg_icetea_init(&opt);
+    zend_update_property_stringl(
+        tg_icetea_ce,
+        getThis(),
+        ZEND_STRL("tgic"),
+        (char *)(&tgic),
+        sizeof(tgic)
+        TSRMLS_CC
+    );
+}
+
+
+/**
+ * TgIceTea::__destruct
+ */
+PHP_METHOD(TgIceTea_TgIceTea, __destruct)
+{
+}
+
+
+/**
+ * TgIceTea::process_update
+ *
+ * @param string $json
+ */
+PHP_METHOD(TgIceTea_TgIceTea, process_update)
+{
+}
+
 
 /**
  * Extension Init.
