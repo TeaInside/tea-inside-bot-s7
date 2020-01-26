@@ -36,4 +36,4 @@ uint8_t __internal_debug_log(const char *msg, ...)
     return 0;
 }
 
-}
+} // extern "C"

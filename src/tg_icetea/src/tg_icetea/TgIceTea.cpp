@@ -20,4 +20,4 @@ TgIceTea::TgIceTea(char *token, char *bot_username)
 }
 
 
-} // namespace
+} // namespace tg_icetea

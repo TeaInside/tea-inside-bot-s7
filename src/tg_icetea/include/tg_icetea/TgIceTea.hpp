@@ -18,7 +18,7 @@ private:
     uint8_t log_level = 0;
 };
 
-} // namespace
+} // namespace tg_icetea
 
 uint8_t __internal_debug_log(const char *msg, ...);
 
