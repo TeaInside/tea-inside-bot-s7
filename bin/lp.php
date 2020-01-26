@@ -19,5 +19,5 @@ proc_close($proc);
 
 __halt_compiler();
 
-$st = new TeaBot\Daemon;
+$st = new TgIceTea\TgIceTea("test", "abc");
 $st->run("test");

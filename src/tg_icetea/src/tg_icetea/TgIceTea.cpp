@@ -7,6 +7,9 @@ namespace tg_icetea {
 
 /**
  * Constructor.
+ *
+ * @param char *token (Bot token)
+ * @param char *bot_username (Bot username which belongs to bot token)
  */
 TgIceTea::TgIceTea(char *token, char *bot_username)
 {

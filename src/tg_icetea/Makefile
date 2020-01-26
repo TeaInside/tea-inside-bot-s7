@@ -1,5 +1,5 @@
 
-BASEDIR = ~$$BASEDIR$$~
+BASEDIR = /home/ammarfaizi2/project/now/bot-s7/src/tg_icetea
 MAIN_BIN = icetea
 LIB_SHARED_BIN = libtg-icetea-s7.so
 COMPILER = g++

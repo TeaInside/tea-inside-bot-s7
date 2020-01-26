@@ -1,6 +1,6 @@
 <?php
 
-$phpExtDir = $makeDir."/src/daemon/php";
+$phpExtDir = $makeDir."/src/tg_icetea/php";
 
 /**
  * Clean phpize
