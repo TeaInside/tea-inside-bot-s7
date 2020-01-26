@@ -24,7 +24,7 @@ TgIceTea::TgIceTea(char *token, char *bot_username)
  *
  * @param char *json
  */
-TgIceTea::processUpdate(char *json)
+void TgIceTea::processUpdate(char *json)
 {
     
 }

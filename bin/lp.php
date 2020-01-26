@@ -21,3 +21,5 @@ __halt_compiler();
 
 $st = new TgIceTea\TgIceTea("test", "abc");
 $st->process_update("test");
+
+var_dump($st);

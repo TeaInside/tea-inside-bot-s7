@@ -10,7 +10,7 @@ class TgIceTea
 {
 public:
     TgIceTea(char *token, char *bot_username);
-    processUpdate(char *json);
+    void processUpdate(char *json);
 
 private:
     char token[64];
