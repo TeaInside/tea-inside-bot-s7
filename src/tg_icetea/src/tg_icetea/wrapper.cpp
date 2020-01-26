@@ -17,5 +17,11 @@ tg_icetea_obj *tg_icetea_init(tg_icetea_opt *opt)
     return tgic;
 }
 
+void tg_icetea_destroy(tg_icetea_obj *tgic)
+{
+    delete STH(tgic);
+    free(tgic);
+    printf("Destroyed!\n");
+}
 
 } // extern "C"

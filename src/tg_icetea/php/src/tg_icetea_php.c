@@ -1,4 +1,5 @@
 
+#include <stdio.h>
 #include <stdlib.h>
 #include "tg_icetea_php.h"
 #include "../../include/tg_icetea/wrapper.h"
@@ -68,6 +69,19 @@ PHP_METHOD(TgIceTea_TgIceTea, __construct)
  */
 PHP_METHOD(TgIceTea_TgIceTea, __destruct)
 {
+    zval rv, *tgic_zval;
+
+    tgic_zval = zend_read_property(
+        tg_icetea_ce,
+        getThis(),
+        ZEND_STRL("tgic"),
+        0,
+        &rv
+    );
+
+    #define tgic (*((tg_icetea_obj **)(tgic_zval->value.str->val)))
+    tg_icetea_destroy(tgic);
+    #undef tgic
 }
 
 
@@ -78,6 +92,21 @@ PHP_METHOD(TgIceTea_TgIceTea, __destruct)
  */
 PHP_METHOD(TgIceTea_TgIceTea, process_update)
 {
+    zval rv, *tgic_zval;
+
+    tgic_zval = zend_read_property(
+        tg_icetea_ce,
+        getThis(),
+        ZEND_STRL("tgic"),
+        0,
+        &rv
+    );
+
+    #define tgic (*((tg_icetea_obj **)(tgic_zval->value.str->val)))
+
+    
+
+    #undef tgic
 }
 
 

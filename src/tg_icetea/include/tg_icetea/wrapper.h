@@ -22,6 +22,7 @@ typedef struct {
 } tg_icetea_opt;
 
 tg_icetea_obj *tg_icetea_init(tg_icetea_opt *opt);
+void tg_icetea_destroy(tg_icetea_obj *tgic);
 
 #ifdef __cplusplus
 } // extern "C"

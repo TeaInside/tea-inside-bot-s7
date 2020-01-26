@@ -13,4 +13,7 @@ if (!file_exists($phpExtDir."/build.lock")) {
     sh("./configure");
     sh("make");
     file_put_contents($phpExtDir."/build.lock", time());
+} else {
+    shchdir($phpExtDir);
+    sh("make");
 }
