@@ -7,21 +7,26 @@
 #include <cstdint>
 #include <nlohmann/json.hpp>
 
-namespace tg_icetea {
-
 using json = nlohmann::json;
+
+#include <tg_icetea/Queues.hpp>
+
+namespace tg_icetea {
 
 class TgIceTea
 {
 public:
+    Queues qw;
     TgIceTea(char *token, char *bot_username);
     void processUpdate(char *json_string);
 
 private:
-    json in;
+    
     char token[64];
     char username[64];
     uint8_t log_level = 0;
+
+    void dispatch(uint32_t index_queue);
 };
 
 } // namespace tg_icetea

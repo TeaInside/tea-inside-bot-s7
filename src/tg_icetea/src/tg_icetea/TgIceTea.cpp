@@ -31,8 +31,18 @@ TgIceTea::TgIceTea(char *token, char *username)
  */
 void TgIceTea::processUpdate(char *json_string)
 {
-    this->in = json::parse(json_string);
-    printf("json: %s\n", this->in.dump().c_str());
+    this->dispatch(
+        this->qw.addQueue(std::move(json::parse(json_string))));
+}
+
+/**
+ * Dispatch process.
+ *
+ * @param uint32_t index_queue
+ */
+void TgIceTea::dispatch(uint32_t index_queue)
+{
+    printf("test abc: %s", this->qw.queues[index_queue].in.dump().c_str());
 }
 
 } // namespace tg_icetea
