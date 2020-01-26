@@ -6,10 +6,9 @@
 
 #include <cstdint>
 #include <nlohmann/json.hpp>
+#include <tg_icetea/Queues.hpp>
 
 using json = nlohmann::json;
-
-#include <tg_icetea/Queues.hpp>
 
 namespace tg_icetea {
 
