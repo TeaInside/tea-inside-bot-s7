@@ -8,6 +8,7 @@
 .deps
 .~lock*
 config.ini
+config.php
 src/tg_icetea/icetea
 src/tg_icetea/Makefile
 src/tg_icetea/phplink.sh
