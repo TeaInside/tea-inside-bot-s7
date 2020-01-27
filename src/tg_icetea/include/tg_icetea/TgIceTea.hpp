@@ -15,7 +15,6 @@ namespace tg_icetea {
 class TgIceTea
 {
 public:
-    Queues qw;
     TgIceTea(char *token, char *bot_username);
     void processUpdate(char *json_string);
 
