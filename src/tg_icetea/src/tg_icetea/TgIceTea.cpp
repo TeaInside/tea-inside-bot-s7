@@ -62,8 +62,9 @@ uint32_t TgIceTea::addQueue(json &&in)
 void TgIceTea::dispatch(uint32_t index_queue)
 {
     printf("Index queue: %d\n", index_queue);
-    printf("User ID: %ld\n", this->queues[index_queue].user_id);
-    printf("hx: %d\n", this->queues[index_queue].hx);
+    this->queues[index_queue].debugDump();
+    printf("JSON: %s\n", this->queues[index_queue].in.dump().c_str());
+
 }
 
 } // namespace tg_icetea
