@@ -3,10 +3,11 @@
 #define __TG_ICETEA__TGICETEA_HPP
 
 #define DEBUG_LEVEL 10
+#define QUEUE_QUOTA 100
 
 #include <cstdint>
 #include <nlohmann/json.hpp>
-#include <tg_icetea/Queues.hpp>
+#include <tg_icetea/UpdateQueue.hpp>
 
 using json = nlohmann::json;
 
@@ -15,6 +16,7 @@ namespace tg_icetea {
 class TgIceTea
 {
 public:
+    UpdateQueue queues[QUEUE_QUOTA];
     TgIceTea(char *token, char *bot_username);
     void processUpdate(char *json_string);
 
@@ -24,6 +26,7 @@ private:
     char username[64];
     uint8_t log_level = 0;
 
+    uint32_t addQueue(json &&in);
     void dispatch(uint32_t index_queue);
 };
 

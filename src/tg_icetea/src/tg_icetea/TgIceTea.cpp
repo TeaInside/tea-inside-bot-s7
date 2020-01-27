@@ -31,8 +31,27 @@ TgIceTea::TgIceTea(char *token, char *username)
  */
 void TgIceTea::processUpdate(char *json_string)
 {
-    this->dispatch(
-        this->qw.addQueue(std::move(json::parse(json_string))));
+    this->dispatch(this->addQueue(std::move(json::parse(json_string))));
+}
+
+/**
+ * Add json to queue.
+ *
+ * @param json &&in
+ * @return uint32_t
+ */
+uint32_t TgIceTea::addQueue(json &&in)
+{
+    uint32_t i = 0;
+
+    for (; i < QUEUE_QUOTA; ++i) {
+        if (!this->queues[i].busy) {
+            this->queues[i].plug(in);
+            break;
+        }
+    }
+
+    return i;
 }
 
 /**
@@ -42,7 +61,9 @@ void TgIceTea::processUpdate(char *json_string)
  */
 void TgIceTea::dispatch(uint32_t index_queue)
 {
-    printf("test abc: %s", this->qw.queues[index_queue].in.dump().c_str());
+    printf("Index queue: %d\n", index_queue);
+    printf("User ID: %ld\n", this->queues[index_queue].user_id);
+    printf("hx: %d\n", this->queues[index_queue].hx);
 }
 
 } // namespace tg_icetea
